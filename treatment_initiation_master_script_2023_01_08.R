@@ -7,9 +7,11 @@ library("readr")
 library("lubridate")
 
 ## load the spreadsheets : ## 
-clinical_data <- read_csv("/Users/henrymarshall/Documents/R/Ophthalmology/Data_sets/progressa_up_to_date/clinical_data/progressa_clinical_data_2021_11_22.csv") #load clinical df
-demographic_details<- read_csv("/Users/henrymarshall/Documents/R/Ophthalmology/Data_sets/progressa_up_to_date/demographic_data/progressa_demographic_details_2021_11_22.csv")#used for demographic data and IDs
+dir =""
+clinical_data <- read_csv(paste0(dir,"progressa_clinical_data_2021_11_22.csv") #load clinical df
+demographic_details<- read_csv(paste0(dir,"progressa_demographic_details_2021_11_22.csv")#used for demographic data and IDs
  
+## List generic medication names and their drug names:  ##                          
 Timolol<- c( "COMBIGAN", "TIMOLOL","XALACOM", "COSOPT", "NYOGEL", "DUOTRAV", "GANFORT", "TIMOPTOL","TIMOPTIC","AZARGA", "AZAGA", "AZARGRA")
 Brimodine <-c( "SIMBRINZA", "ALPHAGAN")
 Betaxolol <-c("BETOPIC","BETOPTIC")
@@ -24,7 +26,7 @@ Latanoprost <-c( "LATANOPROST", "LANTANOPROST","XALATAN", "XALANTAN", "XALACOM")
 Tafluprost <-("SALFLUTAN")
 
 
-## prepare baseline demographic data
+## Prepare baseline demographic data ##
 demographics<- demographic_details%>%
   mutate(prog_id =as.numeric(str_remove(ID, "PROG")))%>%
   select(prog_id, Gender, DOB,Ethnicity,FamilyHx)%>%
@@ -32,7 +34,7 @@ demographics<- demographic_details%>%
          FamilyHx = ifelse(str_detect(FamilyHx, "RECORD")==TRUE, NA, 
                            ifelse(FamilyHx=="NO", FALSE,  ifelse(FamilyHx=="YES", TRUE, NA))))
 
-## prepare relevant baseline covariates
+## Prepare relevant baseline covariates : ##
 baseline_covariates<-clinical_data%>%
   select(VisitID, IOP_OD, IOP_OS, MD_OD, MD_OS, VCDR_OD, VCDR_OS)%>% #select IOP, MD, VCDR
   na.omit()%>%
@@ -58,7 +60,7 @@ covariates_compiled<-clinical_data%>%
   arrange(prog_id)
   
 
-### construct spreadsheet for summary of treatment data: ####
+## Construct spreadsheet for summary of treatment data : ##
 colnames(clinical_data) = gsub("[[:space:]]", "\\_", colnames(clinical_data))
 medication_spreadsheet<-clinical_data%>%
   
