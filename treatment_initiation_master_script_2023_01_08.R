@@ -143,7 +143,7 @@ treatment_increase_date<-medication_spreadsheet%>%
 complete_medication_spreadsheet<-medication_spreadsheet%>%
   left_join(x=., y = treatment_start, by= "prog_id")%>%
   left_join(x=., y = treatment_increase_date, by= "prog_id")%>%
-  filter(str_detect(VisitID, "\\.01")==TRUE)%>%
+  filter(str_detect(VisitID, "\\.01$")==TRUE)%>% # tricky some VisitID are .015, be more explicit in string
   mutate(treatment_start = ifelse(is.na(treatment_start)==TRUE, NA, treatment_start))%>%
   rename(baseline_date= Visit_Date,baseline_agent_number=agent_number)%>%
   mutate(time_to_increase= ifelse(increase_rx_during_monitoring ==TRUE, as.numeric(dmy(increase_date) - dmy(baseline_date))/365.25,
