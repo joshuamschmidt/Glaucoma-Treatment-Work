@@ -103,7 +103,10 @@ medication_spreadsheet<-clinical_data%>%
          agent_number = Brimodine+ Timolol+ Betaxolol+Acetazolamide+Brinzolamide+Dorzolamide+Brimatoprost+Travoprost+Latanoprost+Tafluprost+SLT+Trab,
 
          #Determine if someone is one treatment at a time point
-         treatment = as.logical(agent_number==0))%>%
+         #---***** SHOULD THIS BE 'if someone is on any treatment at a time point'??? *******---#
+         # as it is, as.logical(agent_number==0) gives TRUE for those not on treament!
+         #treatment = as.logical(agent_number==0))%>%
+         treatment = as.logical(agent_number!=0))%>%
 
   #Calculate some of the treatment summary statistics:
   group_by(prog_id)%>%
