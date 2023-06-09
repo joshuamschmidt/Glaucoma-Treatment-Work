@@ -66,7 +66,7 @@ medication_spreadsheet<-clinical_data%>%
 
   #Prepare spreadsheet :
   #topical data was inputed into either a column called 'glc medication' or into several columns called 'RE medication1'. Could not uniformly use one of another, so have to concatenate them together
-  mutate(GLC_Medication= ifelse(is.na(GLC_Medication)==TRUE, paste0(`RE_Medctn_1`,", ", `RE_Medctn_2`,", ", `LE_Medctn_1`,", ", `LE_Medctn_2`), GLC_Medication),
+  mutate(GLC_Medication= ifelse(is.na(GLC_Medication)==TRUE, paste0(`RE_Medctn_1`,", ",`RE_Medctn_2`,", ", `RE_Medctn_3`,", ", `RE_Medctn_4`,", ", `LE_Medctn_1`,", ", `LE_Medctn_2`, `LE_Medctn_3`,", ", `LE_Medctn_4`), GLC_Medication),
          GLC_Medication= ifelse(str_detect(GLC_Medication, "NA")==TRUE, "NIL", GLC_Medication), #If blank, indicate no treatment
 
          GLC_Medication= toupper(GLC_Medication), #convert to upper case for uniformity
