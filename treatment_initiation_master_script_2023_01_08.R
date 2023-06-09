@@ -111,6 +111,7 @@ medication_spreadsheet<-clinical_data%>%
   #Calculate some of the treatment summary statistics:
   group_by(prog_id)%>%
   mutate(max_agents = max(agent_number), #maximum number of agents (including SLT/Trab) at any time point
+         #--- NOT SURE WHY NOT JUST USE SLT + Trab vars created above???
          SLT_during_monitoring = ifelse(sum(SLT=="TRUE")>0|sum(SLTOS_pd=="YES")>0, TRUE, FALSE), #To know if patient had an SLT at all during monitoring
          TRAB_during_monitoring = ifelse(sum(TRABOD_pd=="YES")>0|sum(TRABOS_pd=="YES")>0,TRUE, #To know if patient had a Trab at all during monitoring
                                          ifelse(sum(TRABOD_pd=="YES")==0&sum(TRABOS_pd=="YES")==0&sum(TRABOD_pd=="NO")==0&sum(TRABOS_pd=="NO")==0,NA,FALSE)))%>%
