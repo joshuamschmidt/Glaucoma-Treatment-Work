@@ -12,7 +12,7 @@ clinical_data <- read_csv(paste0(dir,"progressa_clinical_data_2021_11_22.csv")) 
 demographic_details<- read_csv(paste0(dir,"progressa_demographic_details_2021_11_22.csv")) #used for demographic data and IDs
 
 ## List generic medication names and their drug names:  ##
-Timolol<- c( "COMBIGAN", "TIMOLOL","XALACOM", "COSOPT", "NYOGEL", "DUOTRAV", "GANFORT", "TIMOPTOL","TIMOPTIC","AZARGA", "AZAGA", "AZARGRA")
+Timolol<- c( "TENOPT", "COMBIGAN", "TIMOLOL","XALACOM", "COSOPT", "NYOGEL", "DUOTRAV", "GANFORT", "TIMOPTOL","TIMOPTIC","AZARGA", "AZAGA", "AZARGRA")
 Brimodine <-c( "SIMBRINZA", "ALPHAGAN")
 Betaxolol <-c("BETOPIC","BETOPTIC")
 
